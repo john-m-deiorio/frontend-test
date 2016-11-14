@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="technicolorApp">
+ <head>
+    <title>Technicolor Front-End App</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="http://bootswatch.com/slate/bootstrap.min.css">
+
+
+<style type="text/css">
+  
+label.formLabel {
+  display: block;
+  float: left;
+  width : 120px;    
+}
+
+.panel-success.panelBtn {
+  cursor: pointer;
+}
+.panel-heading.panelBkg {
+  background-color: red;
+}
+
+.navbar .nav > li > a {
+  line-height: 40px;
+}
+
+</style>
+
+</head>
+
+<!-- handles global level functionality like infinite scroll, modal view etc. -->
+<body ng-controller="globalController">
+
+<!-- Main Nav Bootstrap -->
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#topNav" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="topNav" ng-controller="navController">
+      <ul class="nav navbar-nav">
+        <!-- Pass all possible routes where tab may be active to maintain state -->
+        <li class="navItem {{activeClass}}" ng-class="{ active: isActive(['/'])}" ng-click=doLogout()><a href="#/">{{getStatusText()}}</a></li>
+        <li class="navItem" ng-class="{ active: isActive(['/list','/add'])}"><a href="#/list">Guest Book</a></li>
+        <li class="navItem" ng-class="{ active: isActive(['/browse'])}"><a href="#/browse">Browse States</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid nav-stacked-->
+</nav>
+
+<!-- Main Content View Area -->
+<div infinite-scroll="loadMore()" infinite-scroll-disabled="isBusy() || maxStatesLoaded()" infinite-scroll-distance="0.1">
+  <div class="container-fluid">
+            <div ng-view></div>
+  </div>
+</div>
+
+<!-- Modal for state detail view -->
+<div class="modal" id="item-detail-modal">
+    <browse-state-detail-view></browse-state-detail-view>
+</div>
+
+</body>
+
+
+<!-- 3rd party  -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="https://code.angularjs.org/1.5.8/angular-route.min.js"></script>
+<!-- <script type='text/javascript' src='ng-infinite-scroll.min.js'></script> -->
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/ngInfiniteScroll/1.3.0/ng-infinite-scroll.min.js'></script>
+
+
+<!-- main app script -->
+<script type="text/javascript" src="technicolorApp.js"></script>
+
+<!-- app controllers -->
+<script type="text/javascript" src="controllers/loginController.js"></script>
+<script type="text/javascript" src="controllers/guestBookController.js"></script>
+<script type="text/javascript" src="controllers/navController.js"></script>
+<script type="text/javascript" src="controllers/browseStatesController.js"></script>
+
+<!-- custom directives -->
+<script type="text/javascript" src="directives.js"></script>
+
+
+
+</html>

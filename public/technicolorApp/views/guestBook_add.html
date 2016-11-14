@@ -1,0 +1,20 @@
+<h1>Add Message</h1>
+
+<div class="form-group">
+    <label for="txtPhone" class="formLabel">Phone</label>
+    <input type="text" id="txtPhone" ng-model="guestBookFormModel.phone">
+</div>
+<div class="form-group">
+    <label for="txtMessage" class="formLabel">Message</label>
+    <textarea type="text" rows="6" id="txtMessage" class="form-control" ng-model="guestBookFormModel.message"></textarea>
+</div>
+
+<div class="form-group" style="clear:both">
+        <button ng-click="save()" class="btn btn-primary">Save</button>
+        <button ng-click="cancel()" class="btn btn-primary">Cancel</button>
+        <button ng-model="editMode" ng-show={{editMode}} ng-click="delete()" class="btn btn-danger">Delete</button>
+</div>
+
+<!-- guest list template -->
+<guest-list ng-show={{!editMode}}></guest-list>
+

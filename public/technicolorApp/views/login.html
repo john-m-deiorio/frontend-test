@@ -1,0 +1,13 @@
+<h1>Login:</h1>
+    <div class="form-group">
+        <label class="formLabel" for="techniUser">User:</label>
+        <input type="text" id="techniUser" ng-model="loginFormModel.user">
+    </div>
+    <div class="form-group">
+        <label class="formLabel" for="techniPass">Password</label>
+        <input type="password" id="techniPass" ng-model="loginFormModel.password">
+    </div>
+
+    <div class="form-group" style="clear:both">
+        <button ng-click="submitLoginCreds()" class="btn btn-danger">Submit</button>
+    </div>

@@ -1,0 +1,12 @@
+<span ng-show={{!userLoggedIn}}>
+You Must Be Logged In to sign Guest Book
+</span>
+<span ng-show={{userLoggedIn}}>
+<h1>Welcome Back {{displayName}}!</h1>
+    <div class="form-group">
+        <button ng-click="addGuest()" class="btn btn-danger">Sign Guest Book</button>
+    </div>
+
+    <!-- guest list template -->
+    <guest-list></guest-list>
+</span>

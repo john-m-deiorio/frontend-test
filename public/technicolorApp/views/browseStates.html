@@ -1,0 +1,20 @@
+
+	<span ng-show={{!userLoggedIn}}>
+	You Must Be Logged In to Browse States
+	</span>
+	<span ng-show={{userLoggedIn}}>
+		<h1>Browse U.S. States</h1>
+		<div class="form-group">
+		      <label for="radioSortBy">Sort:</label>&nbsp;
+		      <input ng-click="setSortOrder('name',false)" type="radio" name="sort" value="name" checked>Name &nbsp;<input ng-click="setSortOrder('population',true)" type="radio" name="sort" value="population">Population
+		</div>
+			<div class="col-sm-4" ng-repeat="item in data | orderBy:sortOrderBy:direction">
+			    <div class="panel panel-success panelBtn" style="min-height:300px;max-height:600px;overflow:hidden;text-overflow:ellipsis;" ng-click="viewStateDetails(item)" data-toggle="modal" data-target="#item-detail-modal">
+			        <div class="panel-heading panelBkg"><h3 class="panel-title">{{item.name}}</h3></div>
+			        <div class="panel-body">Population: {{item.population}}</div>
+			        <div class="panel-body">Capital: {{item.capital}}</div>
+			        <div class="panel-body">Abbreviation: {{item.abbreviation}}</div>
+			        <div class="panel-body">Square Miles: {{item['square-miles']}}</div>
+			    </div> 
+			</div>
+	</span>

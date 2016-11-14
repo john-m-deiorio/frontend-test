@@ -1,0 +1,24 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>{{selectedState.name}}</h2>
+        </div>
+        <div class="modal-body">
+            <div class="row top-buffer">
+                <div class="col-md-6">
+                    <p><strong>Abbreviation: </strong>{{selectedState.abbreviation}}</p>
+                    <p><strong>Capital: </strong>{{selectedState.capital}}</p>
+                    <p><strong>Most Populous City: </strong>{{selectedState['most-populous-city']}}</p>
+                    <p><strong>Population: </strong>{{selectedState.population}}</p>
+                    <p><strong>DST: </strong>{{selectedState.dst}}</p>
+                    <p><strong>Square Miles: </strong>{{selectedState['square-miles']}}</p>
+                    <p><strong>Time Zone 1: </strong>{{selectedState['time-zone-1']}}</p>
+                    <p><strong>Time Zone 2: </strong>{{selectedState['time-zone-2']}}</p>
+                </div>
+                <div class="col-xs-12 top-buffer">
+                    <button class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

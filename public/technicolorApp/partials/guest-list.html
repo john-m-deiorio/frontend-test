@@ -1,0 +1,11 @@
+    <table class="table table-striped">
+        <tr>
+            <th>User</th>
+            <th>Message</th>
+            <th>Phone</th>
+        <tr data-ng-repeat="item in guestBookData">
+            <td width="20%">{{item.user}}</td>
+            <td width="60%"><div style="max-height:100px;overflow:hidden;text-overflow:ellipsis">{{item.message}}</div></td>
+            <td width="20%"><div style="max-height:100px;overflow:hidden;text-overflow:ellipsis">{{item.phone}}</div></td>
+        </tr>
+    </table>
