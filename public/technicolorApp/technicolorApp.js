@@ -45,9 +45,6 @@
 
     	service.userNameDisplay;
 
-    	// initialize session storage display var
-    	// if (sessionStorage.userNameDisplay) sessionStorage.removeItem("userNameDisplay");
-
     	service.userLog = false;
     	service.navText = "Login";
     	//service.navText = (document.cookie.indexOf("login") >= 0) ? "Logout" : "Login";
@@ -55,23 +52,22 @@
     	service.statesObj = [];
     	service.guestBookObj = [];
 
+    	// method to get login status
     	service.getLoginStatus = function(){
-
     		return service.userLog;
-    		//return (document.cookie.indexOf("login") >= 0) ? true : false;
-
     	}
 
+    	// method to get login display name
     	service.getUserDisplayName = function(){
-
-    		//if (sessionStorage.userNameDisplay) return sessionStorage.userNameDisplay;
     		return service.userNameDisplay;
     	}
 
+    	// method used by nav to display correct text based on login status
     	service.getLoginText = function(){
     		return service.navText;
     	}
 
+    	// request logout service
     	service.logout = function() {
 
         $http.get('http://localhost:8888/logout')
@@ -80,14 +76,13 @@
 
         	console.log("USER LOGGED OUT!!");
 
-			//sessionStorage.removeItem("userNameDisplay");
-
         	service.userLog = false;
 			service.navText = "Login";
 		});
 
 		};
 
+		// request for login service
     	service.login = function(creds) {
 
     		console.log("LOGIN CREDS OBJ " , creds);
@@ -105,14 +100,6 @@
 				// set user name and capitalize first letter
 				service.userNameDisplay = creds.user.charAt(0).toUpperCase() + creds.user.slice(1);
 
-				//if(!sessionStorage.userNameDisplay) sessionStorage.userNameDisplay = service.userNameDisplay;
-
-				//console.log("welcome: " , service.userNameDisplay);
-
-				//console.log("COOKIE: ", document.cookie);
-				//console.log("COOKIE login: " , document.cookie.indexOf("login"));
-
-
 				// reguest data
 				service.requestStatesData(requestLimit,pageOffset);
 				service.requestGuestBook();
@@ -121,27 +108,25 @@
       			console.log("Login error!" , data);
 
       			alert("User not authorized, please try again or contact us for help");
-      			//console.log("COOKIE: ", document.cookie);
-      			//console.log("COOKIE login: " , document.cookie.indexOf("login"));
 
       		});
 
 
 		};
 
+		// pub method returns the state object data
 		service.getStatesObj = function(){
 			return service.statesObj;
 		};
 
+		// pub method returns the guest book object data
 		service.getGuestBookObj = function(){
 			
 			return service.guestBookObj;
 
-			// session storage
-			//if(sessionStorage.guestBookObj) return JSON.parse(sessionStorage.guestBookObj);
 		};
 
-
+		// request for guest book service endpoint
 		service.requestGuestBook = function(){
 
 		console.log("Get guestbook");
@@ -151,16 +136,17 @@
         .success(function(data){
 
 		service.guestBookObj = data;
-		// session storage
-		//if(!sessionStorage.guestBookObj) sessionStorage.guestBookObj = JSON.stringify(data);
 
         $location.path("/list");
 
-		});
+		})
+		.error(function(data){
+      		console.log("guest book services error!" , data);
+      	});
 
 		};
 
-
+		// request for states service endpoint
 		service.requestStatesData = function(limit,page){
 
 		console.log("Request states service");
@@ -186,7 +172,6 @@
 
 		// });
 
-
 		service.statesObj = statesArray;
 
 		pageOffset = statesArray.length;
@@ -199,10 +184,14 @@
 
         service.busy = false;
 
-		});
+		})
+		.error(function(data){
+      		console.log("state services error!" , data);
+      	});
 
 		};
 
+		// method to request more states when user scrolls to bottom of list
 		service.loadStates = function(){
 
 			// console.log("URI PATH" , $location);
@@ -220,6 +209,7 @@
 			}
     	};
 
+    	// method to add guest message to database
 		service.addNewGuest = function(newGuest) {
 			
 
@@ -247,6 +237,7 @@
 
         }]);
 
+		// global page level controller for modal and infinite scroll operations
 		app.controller('globalController',['technicolorServices','$scope',function(technicolorServices,$scope){
 
 			  $scope.selectedState = {};
